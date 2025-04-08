@@ -61,13 +61,10 @@ const ChatDetail: React.FC<ChatDetailProps> = ({ chat, onBack }) => {
       isRead: false,
     };
 
-    // Tambahkan ke state message
     setMessages((prev) => [...prev, newMessage]);
 
-    // Tampilkan loading "Please wait..."
     setIsWaiting(true);
 
-    // Simulasi balasan 2 detik
     setTimeout(() => {
       setIsWaiting(false);
 
@@ -95,7 +92,7 @@ const ChatDetail: React.FC<ChatDetailProps> = ({ chat, onBack }) => {
   };
 
   return (
-    <div className="absolute top-0 right-0 bg-white p-4 rounded shadow w-[734px] h-[537px] flex flex-col">
+    <div className=" bg-white h-[80vh] flex flex-col">
       <ChatHeader
         title={chat.subject}
         subtitle={chat.participant}
@@ -103,8 +100,7 @@ const ChatDetail: React.FC<ChatDetailProps> = ({ chat, onBack }) => {
         group={chat.group}
       />
 
-      {/* Area pesan dengan scroll */}
-      <div className="flex-1 overflow-y-auto mt-4 space-y-4 text-[#4f4f4f] pr-2">
+      <div className="max-h-[50vh] flex-1 overflow-y-auto mt-4 space-y-4 text-[#4f4f4f] pr-2">
         {messages.map((message, idx) => {
           const isYou = message.sender === "You";
           const isNewDate = message.date !== lastDate;

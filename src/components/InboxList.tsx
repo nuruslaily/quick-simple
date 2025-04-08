@@ -11,10 +11,9 @@ const InboxList = ({
   isLoadingInbox,
 }: any) => {
   return (
-    <div className="w-537 h-736 flex flex-col items-center justify-center p-2 md:p-4 ">
-      <div className="w-537 max-w-[734px] h-736 md:h-[537px] fixed top-20 md:absolute md:top-50 md:right-10 bg-white p-4 rounded shadow overflow-hidden">
+    <div className="w-537 h-736 flex flex-col items-center justify-center p-4 md:p-4 ">
+      <div className="w-[90%] fixed top-[5vh] sm:w-[80%] sm:bottom-15 sm:top-auto sm:right-20 xl:w-[50%] xl:max-w-[50%] xl:h-[70vh] xl:top-30 xl:right-10 bg-white p-4 rounded shadow overflow-hidden">
         {selectedChat ? (
-          // 👇 Di layar kecil, tombol "Back" akan terlihat
           <ChatDetail
             chat={selectedChat}
             onBack={() => setSelectedChat(null)}

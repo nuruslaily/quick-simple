@@ -62,6 +62,11 @@ function Inbox() {
     setSelectedChat(updatedChat);
   };
 
+  console.log({
+    activeButton,
+    showOptions,
+  });
+
   return (
     <>
       <div className="h-screen w-screen bg-[#333333] text-gray-200 flex flex-col md:flex-row">
@@ -87,11 +92,11 @@ function Inbox() {
             )}
 
             {activeButton === "task" && (
-              <div className="absolute md:static top-20 w-full max-w-[500px] mx-auto bg-white p-4 rounded shadow h-[400px]">
+              <div className="w-[90%] fixed top-[5vh] sm:w-[80%] sm:bottom-15 sm:top-auto sm:right-20 xl:w-[50%] xl:max-w-[50%] xl:h-[70vh] xl:top-30 xl:right-10 bg-white p-4 rounded shadow overflow-hidden">
                 <input
                   type="text"
                   placeholder="Search Tasks"
-                  className="w-full mb-2 px-2 py-1 border rounded"
+                  className="w-full mb-2 px-2 py-1 border rounded text-gray-500 placeholder:text-gray-500"
                 />
                 <div className="text-center mt-20 text-gray-500">
                   <div className="animate-spin border-t-2 border-gray-500 rounded-full w-6 h-6 mx-auto mb-2"></div>
@@ -100,15 +105,15 @@ function Inbox() {
               </div>
             )}
 
-            <div className="fixed bottom-4 right-4 flex flex-col md:flex-row-reverse z-50">
+            <div className="fixed bottom-4 right-2 flex flex-col-reverse sm:flex-row-reverse justify-center items-center z-50">
               <button
                 onClick={handleMainButtonClick}
-                className="relative w-10 h-10 md:w-15 md:h-15"
+                className="relative w-10 h-10 mt-2 md:w-15 md:h-15 md:ml-6 md:mb-2"
               >
                 {activeButton !== "default" && (
-                  <div className="absolute -left-3 top-1 w-10 h-10 md:w-15 md:h-15 bg-[#4F4F4F] rounded-full z-0" />
+                  <div className="absolute -left-7.5 md:-top-1.5 md:right-6 md:-bottom-0 md:mr-50 right-20 w-10 h-10 bottom-0 sm:right-6 md:w-15 md:h-15 bg-[#4F4F4F] rounded-full" />
                 )}
-                <div className="relative z-10 w-10 h-10 md:w-15 md:h-15 rounded-full flex items-center justify-center">
+                <div className="relative z-10 w-10 h-10 md:right-5 md:bottom-1 md:w-15 md:h-15 rounded-full flex items-center justify-center">
                   <img
                     src={
                       activeButton === "inbox"
@@ -123,45 +128,14 @@ function Inbox() {
                 </div>
               </button>
 
-              {showOptions && activeButton === "default" && (
-                <div className="flex flex-col fixed bottom-6 md:flex-row-reverse md:bottom-4 md:right-33 z-50">
-                  <button onClick={() => handleOptionClick("inbox")}>
-                    <center className="text-xs">Inbox</center>
-                    <img
-                      src={inboxButton}
-                      alt="Inbox"
-                      className="w-10 h-10 md:w-15 md:h-15"
-                    />
-                  </button>
-                  <button onClick={() => handleOptionClick("task")}>
-                    <center className="text-xs">Task</center>
-                    <img
-                      src={taskButton}
-                      alt="Task"
-                      className="w-10 h-10 md:w-15 md:h-15"
-                    />
-                  </button>
-                </div>
-              )}
-              {activeButton === "inbox" && (
-                <div className="fixed bottom-6 right-5 md:flex-row-reverse md:bottom-4 md:right-33 z-50">
-                  <>
-                    <button onClick={() => handleOptionClick("task")}>
-                      <center className="text-xs">Task</center>
-                      <img
-                        src={taskButton}
-                        alt="Task"
-                        className="w-10 h-10 md:w-15 md:h-15"
-                      />
-                    </button>
-                  </>
-                </div>
-              )}
-              {activeButton === "task" && (
-                <>
-                  <div className="fixed bottom-6 md:flex-row-reverse md:bottom-4 md:right-33 z-50">
-                    <button onClick={() => handleOptionClick("inbox")}>
-                      <center>Inbox</center>
+              {showOptions &&
+                (activeButton === "task" || activeButton === "default") && (
+                  <div className="md:mr-2 md:flex-row-reverse md:bottom-4 md:right-20">
+                    <button
+                      className="flex flex-col justify-center items-center"
+                      onClick={() => handleOptionClick("inbox")}
+                    >
+                      <center className="text-sm">Inbox</center>
                       <img
                         src={inboxButton}
                         alt="Inbox"
@@ -169,8 +143,24 @@ function Inbox() {
                       />
                     </button>
                   </div>
-                </>
-              )}
+                )}
+
+              {showOptions &&
+                (activeButton === "inbox" || activeButton === "default") && (
+                  <div className="md:mr-2 md:flex-row-reverse md:bottom-4 md:right-20">
+                    <button
+                      className="flex flex-col justify-center items-center "
+                      onClick={() => handleOptionClick("task")}
+                    >
+                      <center className="text-sm">Task</center>
+                      <img
+                        src={taskButton}
+                        alt="Task"
+                        className="w-10 h-10 md:w-15 md:h-15"
+                      />
+                    </button>
+                  </div>
+                )}
             </div>
           </div>
         </main>

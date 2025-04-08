@@ -8,8 +8,10 @@ const ChatItem = ({ chat, onClick }: any) => (
     {chat.name ? (
       <img src={user} alt="icon" />
     ) : (
-      <div className="w-8 h-8 bg-[#2F80ED] rounded-full text-white flex items-center justify-center text-sm font-bold">
-        {chat.subject.charAt(0)}
+      <div className="w-8 h-8 bg-[#2F80ED] rounded-full ">
+        <span className="w-8 h-8 flex items-center justify-center text-white  text-sm font-bold">
+          {chat.subject.charAt(0)}
+        </span>
       </div>
     )}
 
