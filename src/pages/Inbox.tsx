@@ -64,18 +64,18 @@ function Inbox() {
 
   return (
     <>
-      <div className="h-screen w-screen bg-[#333333] text-gray-200 flex">
-        <aside className="w-64 bg-[#333333] p-4 border divide-x divide-white"></aside>
+      <div className="h-screen w-screen bg-[#333333] text-gray-200 flex flex-col md:flex-row">
+        <aside className="w-full md:w-64 bg-[#333333] p-4 border divide-x divide-white hidden md:block"></aside>
 
-        <main className="flex-1 flex flex-col">
+        <main className="flex-1 flex flex-col overflow-hidden">
           <div className="p-2 pl-2 bg-[#4F4F4F] items-center gap-2 flex">
             <img src={searchButton} alt="search" className="w-5 h-5" />
             <input
               type="text"
-              className="w-full p-2 bg-[#4F4F4F] text-gray-200 "
+              className="w-full p-2 bg-[#4F4F4F] text-gray-200 outline-none"
             />
           </div>
-          <div className="flex-1 flex justify-center items-center relative">
+          <div className="flex-1 flex justify-center items-center relative p-2 overflow-auto">
             {activeButton === "inbox" && (
               <InboxList
                 data={inboxData}
@@ -87,7 +87,7 @@ function Inbox() {
             )}
 
             {activeButton === "task" && (
-              <div className="absolute top-80 right-10 bg-white p-4 rounded shadow w-[500px] h-[400px]">
+              <div className="absolute md:static top-20 w-full max-w-[500px] mx-auto bg-white p-4 rounded shadow h-[400px]">
                 <input
                   type="text"
                   placeholder="Search Tasks"
@@ -100,15 +100,15 @@ function Inbox() {
               </div>
             )}
 
-            <div className="flex flex-row-reverse gap-2 fixed bottom-4 right-4">
+            <div className="fixed bottom-4 right-4 flex flex-col md:flex-row-reverse z-50">
               <button
                 onClick={handleMainButtonClick}
-                className="relative w-24 h-24"
+                className="relative w-10 h-10 md:w-15 md:h-15"
               >
                 {activeButton !== "default" && (
-                  <div className="absolute -left-3 top-1 w-20 h-20 bg-[#4F4F4F] rounded-full z-0" />
+                  <div className="absolute -left-3 top-1 w-10 h-10 md:w-15 md:h-15 bg-[#4F4F4F] rounded-full z-0" />
                 )}
-                <div className="relative z-10 w-20 h-20 rounded-full flex items-center justify-center">
+                <div className="relative z-10 w-10 h-10 md:w-15 md:h-15 rounded-full flex items-center justify-center">
                   <img
                     src={
                       activeButton === "inbox"
@@ -118,49 +118,54 @@ function Inbox() {
                         : allButton
                     }
                     alt="main button"
-                    className="w-20 h-20"
+                    className="w-10 h-10 md:w-15 md:h-15"
                   />
                 </div>
               </button>
 
-              <div className="flex flex-row-reverse gap-2 fixed bottom-6 right-28">
-                {activeButton === "default" && showOptions && (
+              {showOptions && activeButton === "default" && (
+                <div className="flex flex-col fixed bottom-6 md:flex-row-reverse md:bottom-4 md:right-33 z-50">
+                  <button onClick={() => handleOptionClick("inbox")}>
+                    <center className="text-xs">Inbox</center>
+                    <img
+                      src={inboxButton}
+                      alt="Inbox"
+                      className="w-10 h-10 md:w-15 md:h-15"
+                    />
+                  </button>
+                  <button onClick={() => handleOptionClick("task")}>
+                    <center className="text-xs">Task</center>
+                    <img
+                      src={taskButton}
+                      alt="Task"
+                      className="w-10 h-10 md:w-15 md:h-15"
+                    />
+                  </button>
+                </div>
+              )}
+              {activeButton === "inbox" && (
+                <div className="fixed bottom-6 right-5 md:flex-row-reverse md:bottom-4 md:right-33 z-50">
                   <>
-                    <button onClick={() => handleOptionClick("inbox")}>
-                      <center>Inbox</center>
+                    <button onClick={() => handleOptionClick("task")}>
+                      <center className="text-xs">Task</center>
                       <img
-                        src={inboxButton}
-                        alt="Inbox"
-                        className="w-20 h-20"
+                        src={taskButton}
+                        alt="Task"
+                        className="w-10 h-10 md:w-15 md:h-15"
                       />
                     </button>
-
-                    <button onClick={() => handleOptionClick("task")}>
-                      <center>Task</center>
-                      <img src={taskButton} alt="Task" className="w-20 h-20" />
-                    </button>
                   </>
-                )}
-              </div>
-              <div className="flex flex-row-reverse gap-2 fixed bottom-4 right-33">
-                {activeButton === "inbox" && (
-                  <>
-                    <button onClick={() => handleOptionClick("task")}>
-                      <center>Task</center>
-                      <img src={taskButton} alt="Task" className="w-20 h-20" />
-                    </button>
-                  </>
-                )}
-              </div>
+                </div>
+              )}
               {activeButton === "task" && (
                 <>
-                  <div className="flex flex-row-reverse gap-2 fixed bottom-4 right-33">
+                  <div className="fixed bottom-6 md:flex-row-reverse md:bottom-4 md:right-33 z-50">
                     <button onClick={() => handleOptionClick("inbox")}>
                       <center>Inbox</center>
                       <img
                         src={inboxButton}
                         alt="Inbox"
-                        className="w-20 h-20"
+                        className="w-10 h-10 md:w-15 md:h-15"
                       />
                     </button>
                   </div>
